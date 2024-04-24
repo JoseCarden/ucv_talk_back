@@ -14,5 +14,8 @@ export class AuthService {
       data: signUpDto
     });
   }
+  async findAll(){
+    return await this.prisma.usuario_registrado.findMany(); 
+ }
 
 }
