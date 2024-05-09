@@ -7,16 +7,114 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model docente {
-  id_docente Int    @id @unique(map: "id_docente") @default(autoincrement())
-  Nombre     String @db.VarChar(25)
-  Apell      String @db.VarChar(25)
-  Usuario    String @db.VarChar(25)
-  Contra     String @db.VarChar(15)
+model califica_profes {
+  Id_Califica         Int                  @id @unique(map: "Id_Califica") @default(autoincrement())
+  Id_EstudianteRegis  Int?
+  Id_ProfesRegis      Int?
+  Nombre_Prof         String               @db.VarChar(40)
+  Apellido_Prof       String               @db.VarChar(40)
+  Calificacion        Int
+  estudiante_register estudiante_register? @relation(fields: [Id_EstudianteRegis], references: [Id_EstudianteRegis], onDelete: NoAction, onUpdate: NoAction, map: "Fk_IdEstudi")
+  profes_register     profes_register?     @relation(fields: [Id_ProfesRegis], references: [Id_ProfesRegis], onDelete: NoAction, onUpdate: NoAction, map: "Fk_IdProfe")
+  profes_dispo        profes_dispo[]
+
+  @@index([Id_EstudianteRegis], map: "Fk_IdEstudi")
+  @@index([Id_ProfesRegis], map: "Fk_IdProfe")
 }
 
-model usuario_registrado {
-  id_user Int    @id @unique(map: "id_user") @default(autoincrement())
-  Usuario String @db.VarChar(25)
-  Contra  String @db.VarChar(15)
+model categoria {
+  Id_Categoria           Int                      @id @unique(map: "Id_Categoria") @default(autoincrement())
+  Nombre_Cat             String                   @db.VarChar(50)
+  diagnostico_estudiante diagnostico_estudiante[]
+}
+
+model diagnostico_estudiante {
+  Id_Diagnotico       Int                  @id @unique(map: "Id_Diagnotico") @default(autoincrement())
+  Est_Usuario         String               @db.VarChar(20)
+  Id_Categoria        Int
+  Diagnostico         String               @db.VarChar(100)
+  Id_EstudianteRegis  Int?
+  Id_ProfesRegis      Int
+  categoria           categoria            @relation(fields: [Id_Categoria], references: [Id_Categoria], onDelete: NoAction, onUpdate: NoAction, map: "Fk_IdCategoria")
+  estudiante_register estudiante_register? @relation(fields: [Id_EstudianteRegis], references: [Id_EstudianteRegis], onDelete: NoAction, onUpdate: NoAction, map: "Fk_IdEstudia")
+  profes_register     profes_register      @relation(fields: [Id_ProfesRegis], references: [Id_ProfesRegis], onDelete: NoAction, onUpdate: NoAction, map: "Fk_IdProfeso")
+
+  @@index([Id_Categoria], map: "Fk_IdCategoria")
+  @@index([Id_EstudianteRegis], map: "Fk_IdEstudia")
+  @@index([Id_ProfesRegis], map: "Fk_IdProfeso")
+}
+
+model estudiante_register {
+  Id_EstudianteRegis     Int                      @id @unique(map: "Id_EstudianteRegis") @default(autoincrement())
+  Correo                 String?                  @db.VarChar(30)
+  Usuario                String                   @db.VarChar(20)
+  Contra                 String                   @db.VarChar(15)
+  Genero                 Int?
+  califica_profes        califica_profes[]
+  diagnostico_estudiante diagnostico_estudiante[]
+  estudiantes_pendiente  estudiantes_pendiente[]
+  reporte_estudiante     reporte_estudiante[]
+}
+
+model estudiantes_pendiente {
+  Id_EstudPendiente   Int                  @id @unique(map: "Id_EstudPendiente") @default(autoincrement())
+  Usuario_Estu        String?              @db.VarChar(20)
+  Ultima_Conexion     DateTime?            @db.DateTime(0)
+  Id_EstudianteRegis  Int?
+  estudiante_register estudiante_register? @relation(fields: [Id_EstudianteRegis], references: [Id_EstudianteRegis], onDelete: NoAction, onUpdate: NoAction, map: "FK_IdEstu")
+
+  @@index([Id_EstudianteRegis], map: "FK_IdEstu")
+}
+
+model profes_dispo {
+  Id_ProfeDispo   Int              @id @unique(map: "Id_ProfeDispo") @default(autoincrement())
+  Id_ProfesRegis  Int?
+  Id_Califica     Int?
+  NombreProfe     String           @db.VarChar(40)
+  Apellidos       String           @db.VarChar(40)
+  Disponibilidad  String           @db.VarChar(20)
+  Calificacion    Int?
+  Especialidad    String           @db.VarChar(20)
+  califica_profes califica_profes? @relation(fields: [Id_Califica], references: [Id_Califica], onDelete: NoAction, onUpdate: NoAction, map: "FK_IdCalifica")
+  profes_register profes_register? @relation(fields: [Id_ProfesRegis], references: [Id_ProfesRegis], onDelete: NoAction, onUpdate: NoAction, map: "Fk_IdProfes")
+
+  @@index([Id_Califica], map: "FK_IdCalifica")
+  @@index([Id_ProfesRegis], map: "Fk_IdProfes")
+}
+
+model profes_register {
+  Id_ProfesRegis         Int                      @id @unique(map: "Id_ProfesRegis") @default(autoincrement())
+  Nombre                 String                   @db.VarChar(40)
+  Apellido               String                   @db.VarChar(40)
+  Correo                 String                   @db.VarChar(30)
+  Especialidad           String                   @db.VarChar(30)
+  Usuario                String                   @db.VarChar(20)
+  Contra                 String                   @db.VarChar(15)
+  califica_profes        califica_profes[]
+  diagnostico_estudiante diagnostico_estudiante[]
+  profes_dispo           profes_dispo[]
+  reporte_profes         reporte_profes[]
+}
+
+model reporte_estudiante {
+  Id_Reporte          Int                 @id @unique(map: "Id_Reporte") @default(autoincrement())
+  Asunto              String              @db.VarChar(30)
+  Descripcion         String              @db.VarChar(100)
+  Cap_Evidencia       Bytes?
+  Anonimo_Revelar     String?             @db.VarChar(20)
+  Id_EstudianteRegis  Int
+  estudiante_register estudiante_register @relation(fields: [Id_EstudianteRegis], references: [Id_EstudianteRegis], onDelete: NoAction, onUpdate: NoAction, map: "FK_IdEstud")
+
+  @@index([Id_EstudianteRegis], map: "FK_IdEstud")
+}
+
+model reporte_profes {
+  Id_Reporte      Int             @id @unique(map: "Id_Reporte") @default(autoincrement())
+  Asunto          String          @db.VarChar(30)
+  Descripcion     String          @db.VarChar(100)
+  Cap_Evidencia   Bytes?
+  Id_ProfesRegis  Int
+  profes_register profes_register @relation(fields: [Id_ProfesRegis], references: [Id_ProfesRegis], onDelete: NoAction, onUpdate: NoAction, map: "FK_IdProf")
+
+  @@index([Id_ProfesRegis], map: "FK_IdProf")
 }
