@@ -9,13 +9,13 @@ export class AuthService {
 
   constructor(private prisma: PrismaService){}
 
-  async create(signUpDto: SignUpDto) {
-    return await this.prisma.usuario_registrado.create({
-      data: signUpDto
-    });
-  }
-  async findAll(){
-    return await this.prisma.usuario_registrado.findMany(); 
- }
+//   async create(signUpDto: SignUpDto) {
+//     return await this.prisma.usuario_registrado.create({
+//       data: signUpDto
+//     });
+//   }
+//   async findAll(){
+//     return await this.prisma.usuario_registrado.findMany(); 
+//  }
 
 }

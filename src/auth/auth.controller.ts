@@ -8,13 +8,13 @@ import { SignUpDto } from './dto/sign-up.dto';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post('register')
-  createUser(@Body() signUpDto: SignUpDto ) {
-    return this.authService.create( signUpDto );
-  }
-  @Get()
-    findAll(){
-        return this.authService.findAll();
-  }
+  // @Post('register')
+  // createUser(@Body() signUpDto: SignUpDto ) {
+  //   return this.authService.create( signUpDto );
+  // }
+  // @Get()
+  //   findAll(){
+  //       return this.authService.findAll();
+  // }
 
 }
