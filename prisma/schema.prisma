@@ -7,12 +7,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model administrador {
+  Id_admin Int    @id @unique(map: "Id_admin") @default(autoincrement())
+  Correo   String @db.VarChar(30)
+  Usuario  String @db.VarChar(20)
+  Contra   String @db.VarChar(15)
+}
+
 model califica_profes {
   Id_Califica         Int                  @id @unique(map: "Id_Califica") @default(autoincrement())
   Id_EstudianteRegis  Int?
   Id_ProfesRegis      Int?
-  Nombre_Prof         String               @db.VarChar(40)
-  Apellido_Prof       String               @db.VarChar(40)
   Calificacion        Int
   estudiante_register estudiante_register? @relation(fields: [Id_EstudianteRegis], references: [Id_EstudianteRegis], onDelete: NoAction, onUpdate: NoAction, map: "Fk_IdEstudi")
   profes_register     profes_register?     @relation(fields: [Id_ProfesRegis], references: [Id_ProfesRegis], onDelete: NoAction, onUpdate: NoAction, map: "Fk_IdProfe")
