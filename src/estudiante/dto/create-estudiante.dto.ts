@@ -5,7 +5,7 @@ export class CreateEstudianteDto {
     @MinLength(5)
     @MaxLength(30)
     @IsEmail()
-    Correo: string;
+    Correo?: string;
 
     @IsString()
     @MinLength(4)
@@ -20,6 +20,6 @@ export class CreateEstudianteDto {
     Contra: string;
 
     @IsNumber()
-    Genero: number;
+    Genero?: number;
 
 }
