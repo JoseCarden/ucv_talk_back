@@ -18,9 +18,9 @@ export class AdministradorService {
     return await this.prisma.administrador.findMany();
   }
 
-  // findOne(id: number) {
-  //   return `This action returns a #${id} administrador`;
-  // }
+  async findOne(Id_admin: number) {
+    return await this.prisma.administrador.findUnique({where: {Id_admin}});
+  }
 
   // update(id: number, updateAdministradorDto: UpdateAdministradorDto) {
   //   return `This action updates a #${id} administrador`;

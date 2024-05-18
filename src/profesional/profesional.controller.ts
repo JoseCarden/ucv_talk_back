@@ -17,10 +17,10 @@ export class ProfesionalController {
     return this.profesionalService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.profesionalService.findOne(+id);
-  // }
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.profesionalService.findOne(+id);
+  }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateProfesionalDto: UpdateProfesionalDto) {

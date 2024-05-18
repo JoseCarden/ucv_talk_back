@@ -17,10 +17,10 @@ export class EstudianteController {
     return this.estudianteService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.estudianteService.findOne(+id);
-  // }
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.estudianteService.findOne(+id);
+  }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateEstudianteDto: UpdateEstudianteDto) {
