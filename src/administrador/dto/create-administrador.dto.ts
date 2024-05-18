@@ -1,11 +1,13 @@
 import { IsEmail, IsNotEmpty, IsNumber, IsString, Matches, MaxLength, MinLength, isString } from 'class-validator';
 
-export class CreateEstudianteDto {
+export class CreateAdministradorDto {
 
-    @MinLength(5)
+    @IsString()
+    @MinLength(4)
     @MaxLength(30)
+    @IsNotEmpty()
     @IsEmail()
-    Correo?: string;
+    Correo: string;
 
     @IsString()
     @MinLength(4)
@@ -18,8 +20,4 @@ export class CreateEstudianteDto {
     @MaxLength(15)
     @IsNotEmpty()
     Contra: string;
-
-    @IsNumber()
-    Genero?: number;
-
 }
