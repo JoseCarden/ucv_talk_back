@@ -18,9 +18,9 @@ export class ReporEstudianteService {
     return  await this.prisma.reporte_estudiante.findMany();
   }
 
-  // findOne(id: number) {
-  //   return `This action returns a #${id} reporEstudiante`;
-  // }
+  async findOne(Id_Reporte: number) {
+    return await this.prisma.reporte_estudiante.findUnique({where: {Id_Reporte}});
+  }
 
   // update(id: number, updateReporEstudianteDto: UpdateReporEstudianteDto) {
   //   return `This action updates a #${id} reporEstudiante`;

@@ -18,9 +18,9 @@ export class ProfesionalService {
     return await this.prisma.profes_register.findMany();
   }
 
-  // findOne(id: number) {
-  //   return `This action returns a #${id} profesional`;
-  // }
+  async findOne(Id_ProfesRegis: number) {
+    return await this.prisma.profes_register.findUnique({where: {Id_ProfesRegis}});
+  }
 
   // update(id: number, updateProfesionalDto: UpdateProfesionalDto) {
   //   return `This action updates a #${id} profesional`;

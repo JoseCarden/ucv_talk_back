@@ -18,10 +18,10 @@ export class AdministradorController {
     return this.administradorService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.administradorService.findOne(+id);
-  // }
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.administradorService.findOne(+id);
+  }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateAdministradorDto: UpdateAdministradorDto) {

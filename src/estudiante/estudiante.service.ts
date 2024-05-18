@@ -18,9 +18,9 @@ export class EstudianteService {
     return await this.prisma.estudiante_register.findMany();
   }
 
-  // findOne(id: number) {
-  //   return `This action returns a #${id} estudiante`;
-  // }
+  async findOne(Id_EstudianteRegis: number) {
+    return await this.prisma.estudiante_register.findUnique({ where: {Id_EstudianteRegis} });
+  }
 
   // update(id: number, updateEstudianteDto: UpdateEstudianteDto) {
   //   return `This action updates a #${id} estudiante`;
