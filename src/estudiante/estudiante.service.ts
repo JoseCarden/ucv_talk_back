@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateEstudianteDto } from './dto/create-estudiante.dto';
 import { UpdateEstudianteDto } from './dto/update-estudiante.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { LoginEstudiante } from './dto/loginEstudiante.dto';
 
 @Injectable()
 export class EstudianteService {
@@ -20,6 +21,20 @@ export class EstudianteService {
 
   async findOne(Id_EstudianteRegis: number) {
     return await this.prisma.estudiante_register.findUnique({ where: {Id_EstudianteRegis} });
+  }
+
+  async loginEstu(estudianteDTO: LoginEstudiante){
+    
+    const estudiante = await this.prisma.estudiante_register.findFirst({where: {
+      Usuario: estudianteDTO.Usuario,
+      Contra: estudianteDTO.Contra
+    }});
+
+    if(!estudiante){
+      throw new UnauthorizedException('Las credenciales no son validas');
+    }
+    
+    return estudiante;
   }
 
   // update(id: number, updateEstudianteDto: UpdateEstudianteDto) {
