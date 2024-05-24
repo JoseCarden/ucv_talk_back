@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateProfesionalDto } from './dto/create-profesional.dto';
 import { UpdateProfesionalDto } from './dto/update-profesional.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -28,7 +28,13 @@ export class ProfesionalService {
       Correo: profesionalDTO.Correo,
       Usuario: profesionalDTO.Usuario,
       Contra: profesionalDTO.Contra
-    }})
+    }});
+
+    if(!profesional){
+      throw new UnauthorizedException('Las credenciales no son válidas');
+    }
+
+    return profesional;
   }
 
   // update(id: number, updateProfesionalDto: UpdateProfesionalDto) {
