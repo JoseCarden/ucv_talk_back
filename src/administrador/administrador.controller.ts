@@ -8,11 +8,6 @@ export class AdministradorController {
   
   constructor(private readonly administradorService: AdministradorService) {}
 
-  @Post('register')
-  create(@Body() createAdministradorDto: CreateAdministradorDto) {
-    return this.administradorService.create(createAdministradorDto);
-  }
-
   @Get()
   findAll() {
     return this.administradorService.findAll();
@@ -22,6 +17,17 @@ export class AdministradorController {
   findOne(@Param('id') id: string) {
     return this.administradorService.findOne(+id);
   }
+
+  @Post('register')
+  create(@Body() createAdministradorDto: CreateAdministradorDto) {
+    return this.administradorService.create(createAdministradorDto);
+  }
+
+  @Post('login')
+  loginAdmin(@Body() loginAdmin: CreateAdministradorDto){
+    return this.administradorService.loginAdmin(loginAdmin)
+  }
+
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateAdministradorDto: UpdateAdministradorDto) {
