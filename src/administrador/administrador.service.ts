@@ -22,6 +22,14 @@ export class AdministradorService {
     return await this.prisma.administrador.findUnique({where: {Id_admin}});
   }
 
+  async loginAdmin(adminDTO: CreateAdministradorDto){
+    const admin = await this.prisma.administrador.findFirst({ where: {
+      Correo: adminDTO.Correo,
+      Usuario: adminDTO.Usuario,
+      Contra: adminDTO.Contra
+    }})
+  }
+
   // update(id: number, updateAdministradorDto: UpdateAdministradorDto) {
   //   return `This action updates a #${id} administrador`;
   // }
