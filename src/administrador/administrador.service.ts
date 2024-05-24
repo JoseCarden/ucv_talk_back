@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateAdministradorDto } from './dto/create-administrador.dto';
 import { UpdateAdministradorDto } from './dto/update-administrador.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { LoginAdministrador } from './dto/loginAdministrador.dto';
 
 @Injectable()
 export class AdministradorService {
@@ -22,12 +23,19 @@ export class AdministradorService {
     return await this.prisma.administrador.findUnique({where: {Id_admin}});
   }
 
-  async loginAdmin(adminDTO: CreateAdministradorDto){
+  async loginAdmin(adminDTO: LoginAdministrador){
+    
     const admin = await this.prisma.administrador.findFirst({ where: {
       Correo: adminDTO.Correo,
       Usuario: adminDTO.Usuario,
       Contra: adminDTO.Contra
-    }})
+    }});
+
+    if(!admin){
+      throw new UnauthorizedException('Las credenciales no son válidas');
+    }
+
+    return admin;
   }
 
   // update(id: number, updateAdministradorDto: UpdateAdministradorDto) {

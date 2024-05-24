@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { AdministradorService } from './administrador.service';
 import { CreateAdministradorDto } from './dto/create-administrador.dto';
 import { UpdateAdministradorDto } from './dto/update-administrador.dto';
+import { LoginAdministrador } from './dto/loginAdministrador.dto';
 
 @Controller('administrador')
 export class AdministradorController {
@@ -24,8 +25,8 @@ export class AdministradorController {
   }
 
   @Post('login')
-  loginAdmin(@Body() loginAdmin: CreateAdministradorDto){
-    return this.administradorService.loginAdmin(loginAdmin)
+  loginAdmin(@Body() loginAdmin: LoginAdministrador){
+    return this.administradorService.loginAdmin(loginAdmin);
   }
 
 
