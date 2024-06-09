@@ -7,7 +7,7 @@ import { UpdateReporProfeDto } from './dto/update-repor_profe.dto';
 export class ReporProfeController {
   constructor(private readonly reporProfeService: ReporProfeService) {}
 
-  @Post()
+  @Post('nuevo_reporte')
   create(@Body() createReporProfeDto: CreateReporProfeDto) {
     return this.reporProfeService.create(createReporProfeDto);
   }
@@ -22,13 +22,13 @@ export class ReporProfeController {
     return this.reporProfeService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateReporProfeDto: UpdateReporProfeDto) {
-    return this.reporProfeService.update(+id, updateReporProfeDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateReporProfeDto: UpdateReporProfeDto) {
+  //   return this.reporProfeService.update(+id, updateReporProfeDto);
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.reporProfeService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.reporProfeService.remove(+id);
+  // }
 }
