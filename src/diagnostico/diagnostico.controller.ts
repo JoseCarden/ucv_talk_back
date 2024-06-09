@@ -7,7 +7,7 @@ import { UpdateDiagnosticoDto } from './dto/update-diagnostico.dto';
 export class DiagnosticoController {
   constructor(private readonly diagnosticoService: DiagnosticoService) {}
 
-  @Post()
+  @Post('nuevo_diagnostico')
   create(@Body() createDiagnosticoDto: CreateDiagnosticoDto) {
     return this.diagnosticoService.create(createDiagnosticoDto);
   }
@@ -22,13 +22,13 @@ export class DiagnosticoController {
     return this.diagnosticoService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDiagnosticoDto: UpdateDiagnosticoDto) {
-    return this.diagnosticoService.update(+id, updateDiagnosticoDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateDiagnosticoDto: UpdateDiagnosticoDto) {
+  //   return this.diagnosticoService.update(+id, updateDiagnosticoDto);
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.diagnosticoService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.diagnosticoService.remove(+id);
+  // }
 }
