@@ -7,13 +7,17 @@ import { AdministradorModule } from './administrador/administrador.module';
 import { ReporEstudianteModule } from './repor_estudiante/repor_estudiante.module';
 // import { AuthModule } from './auth/auth.module';
 import { ChatModule } from './chat/chat.module';
+import { DiagnosticoModule } from './diagnostico/diagnostico.module';
+import { CalificarProfeModule } from './calificar_profe/calificar_profe.module';
+import { ReporProfeModule } from './repor_profe/repor_profe.module';
 
 @Module({
   imports: [
     EstudianteModule, 
     ProfesionalModule, 
     AdministradorModule, 
-    ReporEstudianteModule, ChatModule]
+    ReporEstudianteModule, ChatModule, DiagnosticoModule, CalificarProfeModule, ReporProfeModule],
+  providers: []
   // controllers: [AppController],
   // providers: [AppService],
 })

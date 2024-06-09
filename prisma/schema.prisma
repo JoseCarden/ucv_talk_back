@@ -15,12 +15,12 @@ model administrador {
 }
 
 model califica_profes {
-  Id_Califica         Int                  @id @unique(map: "Id_Califica") @default(autoincrement())
-  Id_EstudianteRegis  Int?
-  Id_ProfesRegis      Int?
+  Id_Califica         Int                 @id @unique(map: "Id_Califica") @default(autoincrement())
+  Id_EstudianteRegis  Int
+  Id_ProfesRegis      Int
   Calificacion        Int
-  estudiante_register estudiante_register? @relation(fields: [Id_EstudianteRegis], references: [Id_EstudianteRegis], onDelete: NoAction, onUpdate: NoAction, map: "Fk_IdEstudi")
-  profes_register     profes_register?     @relation(fields: [Id_ProfesRegis], references: [Id_ProfesRegis], onDelete: NoAction, onUpdate: NoAction, map: "Fk_IdProfe")
+  estudiante_register estudiante_register @relation(fields: [Id_EstudianteRegis], references: [Id_EstudianteRegis], onDelete: NoAction, onUpdate: NoAction, map: "Fk_IdEstudi")
+  profes_register     profes_register     @relation(fields: [Id_ProfesRegis], references: [Id_ProfesRegis], onDelete: NoAction, onUpdate: NoAction, map: "Fk_IdProfe")
   profes_dispo        profes_dispo[]
 
   @@index([Id_EstudianteRegis], map: "Fk_IdEstudi")
