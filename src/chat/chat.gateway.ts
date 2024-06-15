@@ -29,6 +29,8 @@ export class ChatGateway implements OnGatewayDisconnect{
 
   @SubscribeMessage('add-message') 
   addMessage(client: Socket, message) {
-    this.server.emit('message', {text: message.text, from: this.nicknames[client.id], created: new Date()});
+    const currentDate = new Date();
+    this.server.emit('message', {text: message.text, from: this.nicknames[client.id], created: currentDate});
+    
   }
 }
