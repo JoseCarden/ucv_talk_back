@@ -1,6 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateEstudianteDto } from './dto/create-estudiante.dto';
-import { UpdateEstudianteDto } from './dto/update-estudiante.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { LoginEstudiante } from './dto/loginEstudiante.dto';
 

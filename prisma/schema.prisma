@@ -51,6 +51,7 @@ model diagnostico_estudiante {
 
 model estudiante_register {
   Id_EstudianteRegis     Int                      @id @unique(map: "Id_EstudianteRegis") @default(autoincrement())
+  idUcv_estu             String                   @db.VarChar(10)
   Correo                 String?                  @db.VarChar(30)
   Usuario                String                   @db.VarChar(20)
   Contra                 String                   @db.VarChar(15)
