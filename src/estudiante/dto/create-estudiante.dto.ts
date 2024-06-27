@@ -2,6 +2,12 @@ import { IsEmail, IsNotEmpty, IsNumber, IsString, Matches, MaxLength, MinLength,
 
 export class CreateEstudianteDto {
 
+    @IsString()
+    @MinLength(4)
+    @MaxLength(10)
+    @IsNotEmpty()
+    idUcv_estu: string;
+    
     @MinLength(5)
     @MaxLength(30)
     @IsEmail()
