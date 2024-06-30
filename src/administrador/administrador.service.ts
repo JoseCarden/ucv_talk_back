@@ -1,6 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateAdministradorDto } from './dto/create-administrador.dto';
-import { UpdateAdministradorDto } from './dto/update-administrador.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { LoginAdministrador } from './dto/loginAdministrador.dto';
 
@@ -26,7 +25,6 @@ export class AdministradorService {
   async loginAdmin(adminDTO: LoginAdministrador){
     
     const admin = await this.prisma.administrador.findFirst({ where: {
-      Correo: adminDTO.Correo,
       Usuario: adminDTO.Usuario,
       Contra: adminDTO.Contra
     }});

@@ -4,13 +4,6 @@ export class LoginProfesional{
 
     @IsString()
     @MinLength(4)
-    @MaxLength(30)
-    @IsNotEmpty()
-    @IsEmail()
-    Correo: string;
-
-    @IsString()
-    @MinLength(4)
     @MaxLength(20)
     @IsNotEmpty()
     Usuario: string;

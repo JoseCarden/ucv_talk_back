@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ProfesionalService } from './profesional.service';
 import { CreateProfesionalDto } from './dto/create-profesional.dto';
-import { UpdateProfesionalDto } from './dto/update-profesional.dto';
 import { LoginProfesional } from './dto/loginProfesional';
 
 @Controller('profesional')

@@ -1,14 +1,7 @@
 import { IsEmail, IsNotEmpty, IsNumber, IsString, Matches, MaxLength, MinLength, isString } from 'class-validator';
 
 export class LoginAdministrador {
-
-    @IsString()
-    @MinLength(4)
-    @MaxLength(30)
-    @IsNotEmpty()
-    @IsEmail()
-    Correo: string;
-
+    
     @IsString()
     @MinLength(4)
     @MaxLength(20)
