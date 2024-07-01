@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ProfesionalService } from './profesional.service';
 import { CreateProfesionalDto } from './dto/create-profesional.dto';
 import { LoginProfesional } from './dto/loginProfesional';
+import { UpdateProfesionalDto } from './dto/update-profesional.dto';
 
 @Controller('profesional')
 export class ProfesionalController {
@@ -28,10 +29,10 @@ export class ProfesionalController {
   }
 
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateProfesionalDto: UpdateProfesionalDto) {
-  //   return this.profesionalService.update(+id, updateProfesionalDto);
-  // }
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateProfesionalDto: UpdateProfesionalDto) {
+    return this.profesionalService.update(+id, updateProfesionalDto);
+  }
 
   // @Delete(':id')
   // remove(@Param('id') id: string) {

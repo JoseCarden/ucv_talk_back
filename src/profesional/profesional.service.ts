@@ -1,7 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreateProfesionalDto } from './dto/create-profesional.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { LoginProfesional } from './dto/loginProfesional';
+import { UpdateProfesionalDto } from './dto/update-profesional.dto';
 
 @Injectable()
 export class ProfesionalService {
@@ -35,9 +36,28 @@ export class ProfesionalService {
     return profesional;
   }
 
-  // update(id: number, updateProfesionalDto: UpdateProfesionalDto) {
-  //   return `This action updates a #${id} profesional`;
-  // }
+  async update(id: number, updateProfesionalDto: UpdateProfesionalDto) {
+
+    const pro = await this.prisma.profes_register.update({
+      where: {
+        Id_ProfesRegis: id,
+      },
+      data: {
+        Nombre: updateProfesionalDto.Nombre,
+        Apellido: updateProfesionalDto.Apellido,
+        Correo: updateProfesionalDto.Correo,
+        Especialidad: updateProfesionalDto.Especialidad,
+        Usuario: updateProfesionalDto.Usuario,
+        Contra: updateProfesionalDto.Contra
+      }
+    })
+
+    if(!pro){
+      throw new NotFoundException(`Profesional de id: ${id} no encontrado`);
+    }
+
+    return pro;
+  }
 
   // remove(id: number) {
   //   return `This action removes a #${id} profesional`;
