@@ -1,7 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreateEstudianteDto } from './dto/create-estudiante.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { LoginEstudiante } from './dto/loginEstudiante.dto';
+import { UpdateEstudianteDto } from './dto/update-estudiante.dto';
 
 @Injectable()
 export class EstudianteService {
@@ -36,9 +37,27 @@ export class EstudianteService {
     return estudiante;
   }
 
-  // update(id: number, updateEstudianteDto: UpdateEstudianteDto) {
-  //   return `This action updates a #${id} estudiante`;
-  // }
+  async update(id: number, updateEstudianteDto: UpdateEstudianteDto) {
+
+    const estu = await this.prisma.estudiante_register.update({
+      where:{
+        Id_EstudianteRegis: id,
+      },
+      data : {
+        idUcv_estu: updateEstudianteDto.idUcv_estu,
+        Correo: updateEstudianteDto.Correo,
+        Usuario: updateEstudianteDto.Usuario,
+        Contra: updateEstudianteDto.Contra,
+        Genero: updateEstudianteDto.Genero
+      }
+    })
+
+    if(!estu){
+      throw new NotFoundException(`Estudiante de id: ${id} no encontrado`);
+    }
+
+    return estu;
+  }
 
   // remove(id: number) {
   //   return `This action removes a #${id} estudiante`;
