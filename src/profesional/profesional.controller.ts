@@ -18,6 +18,11 @@ export class ProfesionalController {
     return this.profesionalService.findOne(+id);
   }
 
+  @Get('newPass/:email')
+  findByEmail(@Param('email') email: string){
+    return this.profesionalService.findByEmail(email);
+  }
+
   @Post('register')
   create(@Body() createProfesionalDto: CreateProfesionalDto) {
     return this.profesionalService.create(createProfesionalDto);

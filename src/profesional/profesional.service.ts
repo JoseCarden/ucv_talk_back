@@ -23,6 +23,10 @@ export class ProfesionalService {
     return await this.prisma.profes_register.findUnique({where: {Id_ProfesRegis}});
   }
 
+  async findByEmail(email: string){
+    return await this.prisma.profes_register.findFirst({where: {Correo: email}});
+  }
+
   async loginProfe(profesionalDTO: LoginProfesional){
     const profesional = await this.prisma.profes_register.findFirst({ where: {
       Usuario: profesionalDTO.Usuario,
